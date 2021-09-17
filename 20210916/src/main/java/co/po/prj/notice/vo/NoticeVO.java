@@ -14,7 +14,8 @@ public class NoticeVO {
 	private String title;
 	private String contents;
 	private int hit;
+	private String fileName;
 	
-	private String name;
+	private String name;  //이름을 사용하기 위해
 
 }

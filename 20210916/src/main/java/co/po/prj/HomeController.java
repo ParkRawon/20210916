@@ -17,4 +17,10 @@ public class HomeController {
 		return "home/home";
 	}
 	
+	@RequestMapping("/ajaxTest.do")
+	public String ajaxTest() {  //ajax 페이지 호출
+		
+		return "notice/testAjax";
+	}
+	
 }

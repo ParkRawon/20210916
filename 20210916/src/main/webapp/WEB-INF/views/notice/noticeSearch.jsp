@@ -8,7 +8,7 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
  $(document).ready(function(){
-	$("#keyId").click(function(){
+	$("#keyId").click(function(){   //#keyId가 클릭된다면
 		frm.action = "bSearch.do";
 		frm.submit();
 	});
