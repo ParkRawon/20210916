@@ -1,5 +1,8 @@
 package co.po.prj.notice.web;
 
+import java.io.File;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,9 @@ import co.po.prj.notice.vo.NoticeVO;
 public class NoticeController {
 	@Autowired
 	private NoticeService noticeDao;
+	
+	@Autowired
+	private String uploadPath; //파일이 저장될 경로
 	
 	@RequestMapping("/noticeSearch.do")  //게시글 검색 폼 호출
 	String noticeSearch() {	
@@ -67,8 +73,26 @@ public class NoticeController {
 		return "notice/noticeForm";
 	}
 	
-	@RequestMapping("/noticeInsert.do")  //공지사항 등록 결과 페이지 
-	String noticeInsert(MultipartFile file, NoticeVO notice, Model model, HttpSession session){
+	@RequestMapping("/noticeInsert.do")  //게시물등록,파일업로드 결과 페이지 
+	String noticeInsert(MultipartFile attchfile, NoticeVO notice, Model model, HttpServletRequest request){
+		String fileName = attchfile.getOriginalFilename();  //파일명 구하기
+		notice.setFileName(fileName);  //넘어온 파일명 실어주기
+		notice.setWriter("park");   //작성자 id 담기
+		String filepath = request.getSession().getServletContext().getRealPath("/") + "//fileUp//";
+		File saveFile = new File(filepath, fileName);  //파일객체를 통해서 디렉토리명과 파일명을 실어줌
+		try {
+			attchfile.transferTo(saveFile); //파일저장
+			if(saveFile.exists()) { //saveFile이 존재하면
+				noticeDao.noticeInsert(notice);
+			}else {
+				model.addAttribute("message", fileName+"저장실패");
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("message","파일전송 실패");
+		}
+		
 		return "notice/noticeInsertResult";
 	}
 }	

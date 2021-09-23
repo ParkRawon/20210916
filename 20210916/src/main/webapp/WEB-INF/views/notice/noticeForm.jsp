@@ -10,7 +10,7 @@
 <div align="center">
 	<div><h1>공지사항 등록</h1></div>
 	<div>
-		<form id="frm" name="frm" action="noticeInsert.do" method="post">
+		<form id="frm" name="frm" action="noticeInsert.do" method="post" enctype="multipart/form-data">
 			<div>
 			<table border="1">
 				<tr>
@@ -27,7 +27,7 @@
 				</tr>	
 				<tr>
 					<th>첨부파일</th>
-					<td><input type="file" id="file" name="file"></td>
+					<td><input type="file" id="attchfile" name="attchfile"></td>
 				</tr>	
 			</table>
 			</div><br>

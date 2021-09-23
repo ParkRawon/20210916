@@ -17,5 +17,10 @@
 		</if>
 	</select>
 	
+	<insert id="noticeInsert" parameterType="co.po.prj.notice.vo.NoticeVO">
+		insert into notice(id, writer, writedate, title, contents, filename)
+		values(n_id.nextval, #{writer}, #{writeDate}, #{title}, #{contents}, #{fileName})
+	</insert>
+	
 
 </mapper>

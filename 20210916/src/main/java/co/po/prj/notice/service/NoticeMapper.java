@@ -13,4 +13,5 @@ public interface NoticeMapper {
 			@Param("val")String val);   //@Param:  매개 변수에 대한 설명을 표시 할 때 사용, 
 	                                    //         Mybatis의 SQL 문장에 다수의 파라미터를 전달할 때는 전달되는 변수들에 
 	                                    //         꼭 @Param 어노테이션을 붙여줘야한다.	
+	int noticeInsert(NoticeVO vo);
 }

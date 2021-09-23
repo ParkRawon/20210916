@@ -26,4 +26,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return map.noticeWriterSearch(key, val);
 	}
 
+	@Override
+	public int noticeInsert(NoticeVO vo) {
+		// 게시물 입력
+		return map.noticeInsert(vo);
+	}
+
 }
