@@ -8,8 +8,8 @@
 		<property name="defaultEncoding" value="utf-8" />
 	</bean>	
 	
-	<bean id="uploadPath" class="java.lang.String">  
-		<constructor-arg value=""/>
+	<bean id="filePath" class="java.lang.String">
+		<constructor-arg value="C:\Dev\git\20210916\20210916\src\main\webapp\fileUp"></constructor-arg>
 	</bean>
 
 </beans>

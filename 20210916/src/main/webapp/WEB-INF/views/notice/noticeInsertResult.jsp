@@ -8,6 +8,6 @@
 </head>
 <body>
 <h1>${message }</h1>
-<h1>${notice.writeDate } : ${notice.title } : ${notice.contents }</h1>
+
 </body>
 </html>

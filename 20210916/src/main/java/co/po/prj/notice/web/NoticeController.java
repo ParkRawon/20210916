@@ -23,7 +23,7 @@ public class NoticeController {
 	private NoticeService noticeDao;
 	
 	@Autowired
-	private String uploadPath; //파일이 저장될 경로
+	private String filePath; //파일이 저장될 경로
 	
 	@RequestMapping("/noticeSearch.do")  //게시글 검색 폼 호출
 	String noticeSearch() {	
@@ -74,16 +74,17 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/noticeInsert.do")  //게시물등록,파일업로드 결과 페이지 
-	String noticeInsert(MultipartFile attchfile, NoticeVO notice, Model model, HttpServletRequest request){
+	String noticeInsert(MultipartFile attchfile, NoticeVO notice, Model model, HttpSession session){
 		String fileName = attchfile.getOriginalFilename();  //파일명 구하기
-		notice.setFileName(fileName);  //넘어온 파일명 실어주기
+		String realPath = filePath + "//" + fileName;
+		notice.setFileName(realPath);  //넘어온 파일명 실어주기
 		notice.setWriter("park");   //작성자 id 담기
-		String filepath = request.getSession().getServletContext().getRealPath("/") + "//fileUp//";
-		File saveFile = new File(filepath, fileName);  //파일객체를 통해서 디렉토리명과 파일명을 실어줌
+		File saveFile = new File(filePath, fileName);  //파일객체를 통해서 디렉토리명과 파일명을 실어줌
 		try {
 			attchfile.transferTo(saveFile); //파일저장
 			if(saveFile.exists()) { //saveFile이 존재하면
 				noticeDao.noticeInsert(notice);
+				model.addAttribute("file",realPath);
 			}else {
 				model.addAttribute("message", fileName+"저장실패");
 			}
